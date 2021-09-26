@@ -1,2 +1,2 @@
 # Random-Code
- just some random code of mine
+ this is just some random code that im putting on github to make my stats look better :)
