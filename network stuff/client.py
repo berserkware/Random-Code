@@ -12,6 +12,10 @@ FORMAT = "utf-8"
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(ADDR)
 
+def recieve():
+    while True:
+        print(client.recv(2048).decode(FORMAT))
+
 def send(msg):
     message = msg.encode(FORMAT)
     msg_length = len(message)
@@ -19,3 +23,12 @@ def send(msg):
     send_length += b' ' * (HEADER - len(send_length))
     client.send(send_length)
     client.send(message)
+
+def start():
+    thread = threading.Thread(target=recieve, args=())
+    thread.start()
+    while True:
+        msg = input()
+        send(msg)
+
+start()
