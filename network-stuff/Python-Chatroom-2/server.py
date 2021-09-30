@@ -24,13 +24,11 @@ class Server():
             if msg != "":
                 self.Send(f"[{username}] {msg}")
         
-
     def Send(self, msg):
         for i in self.clients:
             i.send(str(msg).encode("utf-8"))
         print(msg)
 
-    
     def Start_Server(self):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)   
 
