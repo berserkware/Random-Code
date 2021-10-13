@@ -1,7 +1,7 @@
 from PIL import Image, ImageFilter
 import os
 
-commands = ["filter", "resize", "reset", "save", "help"]
+commands = ["filter", "resize", "reset", "save", "help", "combine"]
 filters = ["BLUR", "CONTOUR", "DETAIL", "EDGE_ENHANCE", "EDGE_ENHANCE_MORE", "EMBOSS", "FIND_EDGES", "SHARPEN", "SMOOTH", "SMOOTH_MORE"]
 
 print("Welocme to photo editor")
@@ -58,7 +58,7 @@ while True:
             print("That is not a valid command")
     elif command[0] == commands[1]:
         try:
-            image = image.resize((int(command[1]), int(command[2])))
+            image = image.resize((int(command[1]), int(command[2])), Image.ANTIALIAS)
             image.show()
         except:
             print("That is not a valid command")
@@ -87,8 +87,28 @@ while True:
         print(" ")
         print(" 3. reset - resets the image to its original state")
         print(" ")
-        print(" 4. save - saves the image")
+        print(" 4. combine [image1 path] [image2 path] [width] [height]")
+        print(" 5. save - saves the image")
+    elif command[0] == commands[5]:
+        try:
+            image1 = Image.open(command[1])
+            image2 = Image.open(command[2])
+        except:
+            print("Could not find that file")
 
+        try:
+            width = int(command[3])
+            height = int(command[4])
+        except:
+            print("that is not vaid number")
 
+        image1 = image1.resize((width, height))
+        image2 = image2.resize((width, height))
+
+        image = Image.blend(image1, image2, 0.5)
+
+        image.show()
+
+        
     else:
         print("That is not a valid command")

@@ -1,8 +1,10 @@
 import discord
-import requests
-import random
+import json
 
-lastnumber = 7920
+with open("b:/random-code/discord-bots/billionbot/number.json", 'r') as f:
+    number = json.load(f)
+
+lastnumber = number["number"]
 
 TOKEN = 'beans'
 
@@ -11,19 +13,25 @@ client = discord.Client()
 @client.event
 async def on_message(message):
     if message.channel.id == 891829061444304910:
-        global lastnumber
-        newnumber = lastnumber + 1
-        try:
-            number = int(message.content)
-        except:
-            await message.delete()
-            return
+        with open("b:/random-code/discord-bots/billionbot/number.json", 'w') as f:
+            global lastnumber
+            newnumber = lastnumber + 1
 
-        if number != newnumber:
-            await message.delete()
-            return
+            data = {
+                "number" : newnumber
+            }
+            f.write(json.dumps(data))
+            try:
+                number = int(message.content)
+            except:
+                await message.delete()
+                return
 
-        lastnumber = newnumber
+            if number != newnumber:
+                await message.delete()
+                return
+
+            lastnumber = newnumber
 
         
 
