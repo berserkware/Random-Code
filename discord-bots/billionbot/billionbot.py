@@ -12,6 +12,21 @@ client = discord.Client()
 
 @client.event
 async def on_message(message):
+    global lastnumber
+    if message.channel.id == 891829061444304910:
+        if message.content.startswith("set"):
+            with open("b:/random-code/discord-bots/billionbot/number.json", 'w') as f:
+                command = message.content.split(" ")
+                try:
+                    lastnumber = int(command[1])
+                except:
+                    lastnumber = lastnumber
+                data = {
+                "number" : lastnumber
+                }
+                f.write(json.dumps(data))
+
+    
     if message.channel.id == 891829061444304910:
         with open("b:/random-code/discord-bots/billionbot/number.json", 'w') as f:
             global lastnumber
