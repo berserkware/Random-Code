@@ -1,14 +1,28 @@
-from PIL import Image, ImageFilter
+import cv2
+import numpy as np
 
-image1 = Image.open('misc/wallpaper.jpg')
-image2 = Image.open("misc/fog.jpg")
+drawing = False # true if mouse is pressed
+mode = True # if True, draw rectangle. Press 'm' to toggle to curve
+ix,iy = -1,-1
 
-image1 = image1.resize((1920, 1080))
-image2 = image2.resize((1920, 1080))
+# mouse callback function
+def draw_circle(event,x,y,flags,param):
+    global ix,iy,drawing,mode
 
-image1 = image1.convert("RGB")
-image2 = image2.convert("RGB")
+    if event == cv2.EVENT_LBUTTONDOWN:
+        drawing = True
+        ix,iy = x,y
 
-image3 = Image.blend(image1, image2, 0.5)
+    elif event == cv2.EVENT_MOUSEMOVE:
+        if drawing == True:
+            if mode == True:
+                cv2.rectangle(img,(ix,iy),(x,y),(0,255,0),-1)
+            else:
+                cv2.circle(img,(x,y),5,(0,0,255),-1)
 
-image3.show()
+    elif event == cv2.EVENT_LBUTTONUP:
+        drawing = False
+        if mode == True:
+            cv2.rectangle(img,(ix,iy),(x,y),(0,255,0),-1)
+        else:
+            cv2.circle(img,(x,y),5,(0,0,255),-1)

@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    background: black;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: brown;
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+nav {
+    float: right;
+}
+
+nav ul {
+    margin: 50;
+    padding: 0;
+    list-style: none
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 50px;
+
+    position: relative;
+}
+
+nav a {
+    color: aliceblue;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    color: black;
+}
+
+nav a::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background-color: black;
+    top: 0px;
+    width: 0%;
+
+    transition: all ease-in-out 200ms;
+}
+
+nav a:hover::before {
+    width: 100%;
+}
