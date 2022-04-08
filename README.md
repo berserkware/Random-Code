@@ -1,2 +1,2 @@
 # Random-Code
- this is just some random code, most of it is unfinished.
+ This is just a bunch of my random code. Most of it is unfinished.
