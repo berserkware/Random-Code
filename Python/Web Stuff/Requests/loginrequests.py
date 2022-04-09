@@ -2,7 +2,7 @@ import requests
 
 payload = {
     "login" : "berserkware",
-    "password" : "yVgVbzNOlX83"
+    "password" : "nothing"
 }
 
 with requests.Session() as s:

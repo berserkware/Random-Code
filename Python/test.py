@@ -1,2 +1,0 @@
-x = False
-print(x)
